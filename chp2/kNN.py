@@ -34,6 +34,15 @@ def file2matrix(filename):
         classLabelVector.append(int(listFromLine[-1]))
         index+=1
     return returnMat, classLabelVector
+def autoNorm(dataSet):
+    minVals = dataSet.min(0)
+    maxVals = dataSet.max(0)
+    ranges = maxVals -minVals
+    normalSet = zeros(shape(dataSet))
+    m = dataSet.shape[0]
+    normalSet = dataSet - tile(minVals,(m,1))
+    normalSet = normalSet/(normalSet-tile(ranges,(m,1)))
+
 
 # group, labels = createDataSet()
 # print classify0([0,1],group,labels,2)
