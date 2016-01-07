@@ -1,6 +1,8 @@
 __author__ = 'I322233'
 from numpy import *
 import operator
+import matplotlib
+import matplotlib.pyplot as plt
 def createDataSet():
     group = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
     labels = ['A','A','B','B']
@@ -18,5 +20,26 @@ def classify0(inX, dataSet, labels, k):
         classCount[voteLabel] = classCount.get(voteLabel,0)+1
     sortedClassCount = sorted(classCount.iteritems(),key = operator.itemgetter(1),reverse = True)
     return sortedClassCount[0][0]
-group, labels = createDataSet()
-print classify0([0,1],group,labels,2)
+def file2matrix(filename):
+    fr = open(filename)
+    numberOfLines = len(fr.readlines())
+    returnMat = zeros((numberOfLines,3))
+    classLabelVector = []
+    fr = open(filename)
+    index = 0
+    for line in fr.readlines():
+        line = line.strip()
+        listFromLine = line.split('\t')
+        returnMat[index,:] = listFromLine[0:3]
+        classLabelVector.append(int(listFromLine[-1]))
+        index+=1
+    return returnMat, classLabelVector
+
+# group, labels = createDataSet()
+# print classify0([0,1],group,labels,2)
+mat, classLabelVector = file2matrix("datingTestSet2.txt")
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.scatter(mat[:,1],mat[:,2],15.0*array(classLabelVector),15.0*array(classLabelVector))
+plt.show()
+# print mat
