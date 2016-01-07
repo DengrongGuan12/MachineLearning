@@ -41,7 +41,8 @@ def autoNorm(dataSet):
     normalSet = zeros(shape(dataSet))
     m = dataSet.shape[0]
     normalSet = dataSet - tile(minVals,(m,1))
-    normalSet = normalSet/(normalSet-tile(ranges,(m,1)))
+    normalSet = normalSet/tile(ranges,(m,1))
+    return normalSet, ranges, minVals
 
 
 # group, labels = createDataSet()
