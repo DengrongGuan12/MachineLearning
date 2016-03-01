@@ -7,6 +7,7 @@ import kMeans as km
 ## step 1: load data
 print "step 1: load data..."
 dataSet = []
+## read file
 fileIn = open('kmeans_test_set.txt')
 for line in fileIn.readlines():
     lineArr = line.strip().split(' ')
@@ -14,6 +15,8 @@ for line in fileIn.readlines():
 
 ## step 2: clustering...
 print "step 2: clustering..."
+
+## change array to matrix
 dataSet = mat(dataSet)
 k = 4
 centroids, clusterAssment = km.kmeans(dataSet, k)
