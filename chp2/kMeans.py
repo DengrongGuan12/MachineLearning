@@ -54,6 +54,7 @@ def kmeans(dataSet, k):
 
         ## step 4: update centroids,更新k个中心点，根据每个中心点的集群，取集群内所有点的x,y坐标的平均
         for j in range(k):
+            # [:,0]表示第一列所有元素 [0,:]表示第一行所有元素 nonzero 返回非0元素的位置(行号，列号)
             pointsInCluster = dataSet[nonzero(clusterAssment[:, 0].A == j)[0]]
             centroids[j, :] = mean(pointsInCluster, axis = 0)
 
